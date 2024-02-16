@@ -1,0 +1,44 @@
+<%-include("layouts/header")%>
+    <div style="width: 800px; margin: 0 auto;">
+        <form action="" method="post">
+            <div class="imgcontainer">
+                <img src="./images/logo/fau.png" alt="Avatar" class="avatar">
+            </div>
+ 
+
+            <% 
+            let error_user_name="";
+            let error_password="";
+
+            if (messages[0] !== undefined) 
+            { 
+                
+                if (messages[0].login_error !== undefined) 
+                { 
+                    error_user_name =(messages[0].login_error.user_name)?messages[0].login_error.user_name:"";
+                    error_password =(messages[0].login_error.user_password)?messages[0].login_error.user_password:""; 
+                
+                }
+            } 
+            %>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" id="username" required>
+                <p class="error"> <%= error_user_name %>  </p>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                <p class="error">  <%= error_password %>  </p>
+                <button type="submit">Login</button>
+               
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+              
+                <span class="psw">Forgot <a href="/user-register">Go to register page</a></span>
+                <span class="psw">Forgot <a href="/">Go to home page</a></span>
+            </div>
+        </form>
+    </div>
+    <%-include("layouts/footer")%>

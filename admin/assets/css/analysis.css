@@ -1,0 +1,44 @@
+
+.analysis_inner_box{ width: 95%; height: 420px; border: 1px solid#ccc; float: left; margin: 20px 40px 20px 40px; padding: 10px}
+
+.analysis_inner_box_header{ width: 100%; height: 50px; float: left;background: #15283c; color: white}
+.analysis_inner_box_body{ width: 100%; float: left; background: #ccc; height: 300px}
+.analysis_inner_box_footer{ width: 100%; height: 50px; float: left; background: #214162}
+
+.analysis_inner_box_header p {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 50px;
+}
+
+.analysis_inner_box_footer p {
+    color: white; 
+    text-align: center;
+    margin: 0 auto;
+    line-height: 50px;
+}
+
+.analysis_search_box {
+    padding: 10px;
+}
+
+
+
+.analysis_search_box table{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.analysis_search_box table td .analysis_search_input{
+    width: 250px;
+    height: 40px;
+}
+
+
+.analysis_search_box table td .analysis_search_button{
+    height: 40px;
+    font-weight: bold;
+    width: 110px;
+}

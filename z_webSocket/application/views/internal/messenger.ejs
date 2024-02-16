@@ -1,0 +1,122 @@
+<%-include("layouts/header")%>
+
+<link rel="stylesheet" href="./css/messenger.css">
+
+<br>
+<br>
+<br>
+<% 
+let user_id=data.user_id;
+let friend_user_id=data.friend_user_id;
+let last_name=data.last_name;
+
+let previous_conversation_data=false;
+if (typeof data.conversation_data === "object" && Object.keys(data.conversation_data).length != 0) {
+    previous_conversation_data=data.conversation_data ;    
+}
+
+//console.log(previous_conversation_data);
+
+%>
+
+<script>
+    const friend_user_id ='<%=friend_user_id %>';
+    const user_id ='<%=user_id %>';
+    const last_name= '<%=last_name %>';
+</script>    
+<main style="width: 100%; height:80vh">
+        <p> Total active users: <b id="total_active_users"></b></p>
+    <div class="screen">
+        <div class="conversation" id="conversation_main_box">
+            <div class="conversation_list" id="conversation_list">
+
+                <%
+
+                if(previous_conversation_data)
+                    {
+                        Object.entries(previous_conversation_data).forEach(([key, objData]) => {
+
+                            if(objData.user_id==friend_user_id)
+                            {
+                                if(objData.message_type==1)
+                                {
+                            %>
+                                
+                        
+                                <div class="messages messages--received"> <div class="message"><%=objData.message%></div></div>
+                                
+                            <% 
+                            }else{
+                                %>
+                                <div class="messages messages--received"><div class="message message--thumb thumb" style="width: 23px; height: 23px;"></div></div>
+
+                            <%}
+                        } 
+                        else{
+
+                            if(objData.message_type==1)
+                                { %>
+                                    <div class="messages messages--sent"> <div class="message"><%=objData.message%></div></div>
+
+                                <%}
+                                else{
+                                    %>
+
+                                    <div class="messages messages--sent"><div class="message message--thumb thumb" style="width: 23px; height: 23px;"></div></div>
+                            <%  }
+                        }
+                    });
+
+
+                    }
+            
+
+                %>
+
+
+            <!--  <div class="messages messages--received">
+                    <div class="message message--thumb thumb" style="width: 23px; height: 23px;"></div>
+                </div>
+                <div class="messages messages--received">
+                    <div class="message">This codepen is an exemple of</div>
+                </div>
+                <div class="messages messages--sent">
+                    <div class="message">Try to type</div>
+                </div>
+
+                <div class="messages messages--sent">
+                    <div class="message message--thumb thumb" style="width: 23px; height: 23px;"></div>
+                </div>
+    -->
+            
+
+
+
+
+            </div>
+
+ 
+            <div class="messages messages-blank" id="blank_super_message">
+                <div class="message" id="blank_super_message_span">   </div>
+            </div>
+            
+        
+        </div>
+        <div class="text-bar">
+        <input id="messengerText" type="text" placeholder="Type or thumb up ;)"/>
+            
+            <div class="text-bar__thumb" id="thumbButton">
+                <div class="thumb"></div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="./js/webSocket.js"></script>
+
+
+
+
+<%-include("layouts/footer")%>

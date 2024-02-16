@@ -1,0 +1,98 @@
+<%-include("../layouts/header")%>
+<link rel="stylesheet" href="./css/admin.css">
+
+<br>
+<br>
+<br>
+<main style="width: 100%; height:80vh" class="active_users_list">
+
+<b> show all active users</b>    <br><br> 
+<%
+let user_data=load_data.user_data;
+function getGender(id){
+
+    let data={
+        1:"Male",
+        2:"Female",
+        3:"Others"
+    }
+
+    return data[id];
+}
+
+function getDepartment(id){
+
+    const data={
+        1:"Scientific",
+        2:"Non-Scientific", 
+    }; 
+
+    return data[id];
+}
+%>
+
+
+
+<table>
+    <thead>
+      <tr>
+        <th>Sl</th>
+        <th>Login-time</th>
+        <th>Full name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Department</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+ <%
+        if(user_data.length >0)
+        {
+            let inc=1;
+            Object.entries(user_data).forEach(([index, val]) => {
+            
+            
+                let db_date = new Date(val.session_start_time);
+                let current_date = new Date(); 
+                let timeDifference = current_date - db_date; 
+                let hoursDifference = timeDifference / (1000 * 60 * 60); 
+                let isWithin24Hours = hoursDifference <= 24;
+
+                if (isWithin24Hours) 
+                {
+                    const object_Data = JSON.parse(val.data); 
+                %>
+                <tr>
+                    <td><%=inc++%></td>
+                    <td><%=val.session_start_time%></td>
+                    <td><%=object_Data.first_name%> <%=object_Data.last_name%></td>
+                    <td><%=object_Data.email%></td>
+                    <td><%=getGender(object_Data.gender)%></td>
+                    <td><%=getDepartment(object_Data.department)%></td>
+                    <td>Active</td>
+                    <td>
+                        <button onclick="individualLogout('<%=val.user_id%>')" class="logout-button">Logout</button>
+
+                    </td>
+                </tr> 
+
+    <% } })} %>
+
+    </tbody>
+  </table>
+
+
+</main>
+
+<script>
+
+function individualLogout(user_id){
+
+    //not defination now
+}
+
+</script>
+
+<%-include("../layouts/footer")%>

@@ -1,0 +1,26 @@
+<%-include("layouts/header")%>
+ 
+
+<br>
+<br>
+<br>
+<main style="width: 100%; height:80vh">
+
+<b>See your fried list: </b>    <br>
+<br>
+<%
+
+Object.entries(friend_list).forEach(([key, value]) => {
+   
+%>
+
+<a href="/messenger-<%=value.friend_user_id%>"><%=value.first_name+' '+value.last_name %> </a>
+
+<%});%>
+ 
+
+</main>
+  
+
+
+<%-include("layouts/footer")%>

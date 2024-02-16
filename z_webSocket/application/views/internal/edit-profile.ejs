@@ -1,0 +1,378 @@
+<%-include("layouts/header")%>
+ 
+<link rel="stylesheet" href="./css/edit-profile.css">
+
+<main>
+  <% 
+  const user_basic_data=load_data.user_basic_data;
+  const FRZlib= load_data.FRZlib;
+  let current_city_list=false;
+  let request_data=load_data.request_data;
+
+
+  let show_message=""; 
+  let active_tab_profile="active-tab";
+  let active_div_profile="active";
+
+  let active_tab_photo="";
+  let active_div_photo="";
+
+  if (request_data[0] !==undefined)
+    {
+      if (request_data[0].photo_upload !==undefined) 
+      {
+        show_message=request_data[0].photo_upload.message;
+          active_tab_profile="";
+          active_div_profile="";
+          active_tab_photo="active-tab";
+          active_div_photo="active";
+      } 
+  } 
+    
+  %>
+
+<%
+
+
+function isAvailable(data,values){
+
+    let return_result=false;
+
+        data.forEach(element => {
+        if(element==values)
+        {
+            return_result=true;
+        }
+        });
+
+        return return_result;
+    }
+
+    function formatDateToDayMonthYear(dateString) {
+        const date = new Date(dateString);
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        const addLeadingZero = (value) => (value < 10 ? '0' + value : value);
+        const formattedDate = `${year}-${addLeadingZero(month)}-${addLeadingZero(day)}`;
+    
+        return formattedDate;
+    }
+
+
+%>
+
+
+  <ul class="tabs">
+    <li class="tab profile_information <%=active_tab_profile%>" onclick="openTab(event, 'profile_information')">Profile Information </li>
+    <li class="tab contact_information" onclick="openTab(event, 'contact_information')"> <%=show_message%>Contact Information</li> 
+    <li class="tab address_information" onclick="openTab(event, 'address_information')">Address Information </li>
+    <li class="tab user_information" onclick="openTab(event, 'user_information')">User Information </li>
+    <li class="tab photo_information <%=active_tab_photo%>" onclick="openTab(event, 'photo_information')">User Photo </li>
+    <li class="tab personal_information" onclick="openTab(event, 'personal_information')">Personal information </li>
+  </ul>
+    
+  <div id="profile_information" class="tab-content <%=active_div_profile%>">
+    <h2>Profile information </h2>
+      <div class="container">
+        <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" value="<%=user_basic_data.first_name%>" name="first_name" required>
+        
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" value="<%=user_basic_data.last_name%>"  name="last_name" required>
+        
+            <label for="dob">Date of Birth: </label>
+            <input type="date" id="dob" name="dob" value="<%=formatDateToDayMonthYear(user_basic_data.dob)%>" required>
+        
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option <%=(user_basic_data.gender==1)?'selected':''%> value="1">Male</option>
+                <option <%=(user_basic_data.gender==2)?'selected':''%> value="2">Female</option>
+                <option <%=(user_basic_data.gender==3)?'selected':''%> value="3">Others</option>
+            </select>
+
+            
+            
+          <!-- Work Information -->
+          <label for="department">Department:</label>
+          <select id="department" name="department"> 
+          <% Object.entries(FRZlib.departmentList).forEach(([index, val]) => { %>
+          
+            <option value="<%=index%>" <%=(user_basic_data.department==index)?'selected':''%> ><%=val%> </option>
+
+          <% }) %>
+            
+        </select>
+    
+          <label for="current_position">Current Position:</label>
+          <select id="current_position" name="current_position">
+            <option value=""> Select </option>
+            <% Object.entries(FRZlib.currentPositionList).forEach(([index, val]) => {
+            
+              %>
+            
+              <option value="<%=index%>" <%=(user_basic_data.current_position==index)?'selected':''%> ><%=val%> </option>
+  
+            <% }) %>
+              
+          </select> 
+  
+          <button onclick="updateProfileData('profile_information')" class="save_button" type="button" id="button_profile_information"> Save Information </button>
+    </div>
+  </div>
+
+  <div id="contact_information" class="tab-content">
+    <h2>Contact information </h2>
+    <div class="container">
+      <label for="mobile">Mobile:</label>
+          <input type="tel" id="mobile" value="<%=user_basic_data.mobile%>" name="mobile">
+    
+          <label for="second_email">Secondary Email:</label>
+          <input type="email" id="second_email"  value="<%=user_basic_data.second_email%>"  name="second_email">
+    
+          <label for="office_phone">Office phone:</label>
+          <input type="tel" id="office_phone" value="<%=user_basic_data.office_phone%>"  name="office_phone">
+
+    
+          <button onclick="updateProfileData('contact_information')" class="save_button" type="button" id="button_profile_information"> Save Information </button>
+      </div>
+  </div>
+
+  <div id="address_information" class="tab-content">
+    <h2>Address Information </h2>
+    <div class="container">
+        <!-- Address Information -->
+        
+  
+        
+        <label for="state">State:</label>
+        <select id="state" name="state" onchange="handleSelectChange('<%=user_basic_data.city%>')">
+          <option value=""> Select </option>
+          <% Object.entries(FRZlib.stateList).forEach(([index, obj]) => {
+            
+            if(user_basic_data.state==index)
+            {
+              current_city_list=obj.cities;  
+            }
+            
+          %>
+          
+            <option data="<%=obj.cities%>" value="<%=index%>" <%=(user_basic_data.state==index)?'selected':''%> ><%=obj.name%> </option>
+
+          <% }) %>
+            
+        </select> 
+
+        <label for="city">City:</label>
+        <select id="city" name="city">
+          <option value=""> Select </option>
+          <% 
+          if(current_city_list)
+          {
+      
+            current_city_list.forEach((city, index) => {
+          %>
+          <option  value="<%=index%>" <%=(user_basic_data.city==index)?'selected':''%> ><%=city%> </option>
+
+        
+          <%
+          });
+          }
+          %>
+            
+        </select> 
+
+        <label for="area_code">Area Code:</label>
+        <input type="text" id="area_code" value="<%=user_basic_data.area_code%>" name="area_code">
+  
+  
+      
+
+        <button onclick="updateProfileData('address_information')" class="save_button" type="button" id="button_profile_information"> Save Information </button>
+    </div>
+
+
+  </div>
+
+  <div id="user_information" class="tab-content">
+    <h2>User Information </h2>
+    <div class="container">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="<%=user_basic_data.email%>" readonly disabled>
+  
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="<%=user_basic_data.username%>" readonly disabled>
+  
+      <label for="new_password">New Password:</label>
+      <input type="password" id="new_password" name="new_password">
+  
+      <label for="confirm_password">Confirm Password:</label>
+      <input type="password" id="confirm_password" name="confirm_password">
+      <button  onclick="updateProfileData('user_information')"  class="save_button" type="button" id="button_profile_information"> Save Information </button>
+    </div>
+
+  </div>  
+  
+  <div id="photo_information" class="tab-content <%=active_div_photo%>">
+    <h2>User Photo Information </h2>
+    <div class="container">
+      <div id="photoContainer">
+      <p><%=show_message%></p>
+
+        <img id="uploadedPhoto" src="./user_documents/userphoto/<%=user_basic_data.userphoto%>" alt="User Photo">
+      </div>
+
+      <form enctype="multipart/form-data" action="/profile-photo"  method="post" id="form_photo_information">
+        <input type="file" onchange="onchangeUserPhoto(event)" id="userphoto" name="userphoto" accept="image/*" required>
+        <input type="hidden" name="section_name" value="photo_information" />
+      </form>
+    
+
+      <button  onclick="form_photo_information('form_photo_information','userphoto')"  class="save_button" type="button" id="button_profile_information"> Save Information </button>
+    </div>
+
+  </div> 
+
+  <div id="personal_information" class="tab-content">
+    <h2>Matching information</h2>
+    <div class="container " >
+      
+      <label for="user_objective">User Objective:</label>
+      <textarea id="user_objective" name="user_objective"><%=user_basic_data.user_objective%></textarea>
+
+      <label for="research_details">Research Details:</label>
+      <textarea id="research_details" name="research_details"><%=user_basic_data.research_details%></textarea>
+      <label for="languages">Languages:</label> 
+      
+      <div class="common_multiple_list_box" id="languages_list_box">
+        <%
+
+        let user_languages=false ;
+        if(user_basic_data.user_languages)
+        {
+          user_languages = JSON.parse(user_basic_data.user_languages);
+        }
+        
+
+
+        Object.entries(FRZlib.languageList).forEach(([index, val]) => {
+        
+          let selected_text='';
+          if(user_languages)
+          { 
+                if(isAvailable(user_languages,index))
+                {
+                selected_text='checked';
+                }
+          }
+          
+
+
+        %>
+        <label> <input class="languages" id="languages_<%=index%>" type="checkbox" name="language" value="<%=index%>" <%=selected_text%>> <b><%=val%></b>  </label>
+        
+        <%}) %>
+      </div>
+
+
+      <label for="user_interest">Interest:</label>
+      
+      <div class="common_multiple_list_box" id="user_interest_list_box">
+        <%
+
+        let user_interest=false ;
+        if(user_basic_data.user_interest)
+        {
+          user_interest = JSON.parse(user_basic_data.user_interest);
+        }
+        
+
+
+        Object.entries(FRZlib.interestList).forEach(([index, val]) => {
+        
+          let selected_text='';
+          if(user_interest)
+          { 
+                if(isAvailable(user_interest,index))
+                {
+                selected_text='checked';
+                }
+          }
+          
+
+
+        %>
+        <label> <input class="user_interest" id="user_interest_<%=index%>" type="checkbox" name="user_interest" value="<%=index%>" <%=selected_text%>> <b><%=val%></b>  </label>
+        
+        <%}) %>
+      </div>
+
+      <label for="user_hobbies"> Hobbies:</label>
+      <div class="common_multiple_list_box" id="user_hobbies_list_box">
+        <%
+
+        let user_hobbies=false ;
+        if(user_basic_data.user_hobbies)
+        {
+          user_hobbies = JSON.parse(user_basic_data.user_hobbies);
+        }
+        
+
+
+        Object.entries(FRZlib.hobbiesList).forEach(([index, val]) => {
+        
+          let selected_text='';
+          if(user_hobbies)
+          { 
+                if(isAvailable(user_hobbies,index))
+                {
+                selected_text='checked';
+                }
+          }
+          
+
+
+        %>
+        <label> <input class="user_hobbies" id="user_hobbies_<%=index%>" type="checkbox" name="user_hobbies" value="<%=index%>" <%=selected_text%>> <b><%=val%></b>  </label>
+        
+        <%}) %>
+      </div>
+
+     
+
+      <button onclick="updateProfileData('personal_information')"  class="save_button" type="button" id="button_profile_information"> Save Information </button>
+      </div>
+  </div>
+
+
+</main>
+
+
+<script>
+ 
+function form_photo_information(form_id,input_file_id)
+{
+  Frz.sendUserPhotoSave(form_id,input_file_id);
+}
+function updateProfileData(section_name)
+{
+  Frz.updateUserProfile(section_name);
+}
+
+function handleSelectChange(selectedIndex){
+  Frz.updateCityHtml(selectedIndex);
+}
+
+function onchangeUserPhoto(event)
+{
+  Frz.userphotoShowed(event);  
+}
+
+  function openTab(evt, tabName) 
+  { 
+    Frz.profileTabAction(evt, tabName);
+  }
+</script>
+
+
+<%-include("layouts/footer")%>

@@ -1,0 +1,5 @@
+img.smallProfileLogo:hover {
+    cursor: pointer !important;
+    border: 2px solid red !important;
+}
+.mainChatBox{min-height: 75vh !important;}

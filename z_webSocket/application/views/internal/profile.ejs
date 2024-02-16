@@ -1,0 +1,39 @@
+<%-include("layouts/header")%>
+
+
+
+
+
+<main>
+    
+<div class="profile-header">
+    <img src="./user_documents/userphoto/<%=user_basic_data.userphoto %>" alt="User Avatar">
+    <h1><%=user_basic_data.first_name %> - <%=user_basic_data.last_name %></h1>
+    <p> <a href="/edit-profile">Edit-profile</a></p>
+</div>
+
+<div class="profile-details">
+    <div class="profile-section">
+        <h2>Contact Information</h2>
+        <p>Email: <%=user_basic_data.email%></p>
+        <p>First name : <%=user_basic_data.first_name %></p>
+        <p>Last name : <%=user_basic_data.last_name %>
+        </p>
+        
+    </div>
+
+    <div class="profile-section">
+        <h2>Interests</h2>
+        <ul>
+            <li>....</li>
+            <li>.....</li>
+            <li>...</li>
+        </ul>
+    </div>
+</div>
+
+</main>
+
+
+
+<%-include("layouts/footer")%>

@@ -1,0 +1,111 @@
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  input,
+  select,textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  .tabs {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tab {
+    cursor: pointer;
+    padding: 10px 15px;
+    margin: 0;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background-color: #f1f1f1;
+  }
+
+  .tab:hover {
+    background-color: #ddd;
+  }
+
+  .tab-content {
+    display: none;
+    padding: 15px;
+    border: 1px solid #ddd;
+  }
+
+  .active {
+    display: block;
+  }
+  .active-tab {
+    background:darkgray;
+  }
+  #photoContainer {
+    margin-top: 20px;
+}
+
+#uploadedPhoto {
+    max-width: 100%;
+    max-height: 300px;
+    margin-top: 10px;
+}
+
+.common_multiple_list_box label {
+  display: block;
+  float: left;
+  width: auto;
+  position: relative;
+  min-width: 200px;
+  padding: 2px;
+}
+
+.common_multiple_list_box input[type="checkbox"] {
+  float: left;
+  position: relative;
+  width: 20px;
+  cursor: pointer;
+}
+
+ 
+
+/* Clear the float to prevent layout issues */
+.common_multiple_list_box::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.common_multiple_list_box b {
+  float: left;
+  position: relative;
+  min-width: 100px;
+  width: auto;
+}

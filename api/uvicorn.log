@@ -1,0 +1,14 @@
+nohup: ignoring input
+INFO:     Will watch for changes in these directories: ['/var/www/html/fauconnectapp/fauconnect_api']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [879] using StatReload
+INFO:     Started server process [881]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     77.4.26.104:59251 - "GET /docs HTTP/1.1" 200 OK
+INFO:     77.4.26.104:59251 - "GET /fauconnect-api.json HTTP/1.1" 200 OK
+INFO:     104.251.216.221:53956 - "POST /api/logout HTTP/1.1" 200 OK
+INFO:     104.251.216.221:53964 - "POST /api/adminLogin HTTP/1.1" 200 OK
+INFO:     104.251.216.221:53966 - "GET /api/userPhoto HTTP/1.1" 200 OK
+INFO:     77.4.26.104:59290 - "GET /user_photo//user_photo_1_.png HTTP/1.1" 200 OK
+INFO:     77.4.26.104:59448 - "GET /user_photo//user_photo_1_.png HTTP/1.1" 304 Not Modified

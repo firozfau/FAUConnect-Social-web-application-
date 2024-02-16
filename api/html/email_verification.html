@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification Success</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <p>{{status_icon}}</p>
+        <p>{{status_text}}</p>
+        <p>{{message}}</p>
+        <p>{{go_login_page}}</p>
+    </div>
+</body>
+
+</html>
+
+<style>
+    .loging_redirect_button{
+    width: 100%;
+    height: auto;
+    padding: 13px;
+
+    border-radius: 3px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+    .login_success{background: green;}
+    .login_failed{background: #5bc0de;}
+    .info-icon {
+            color: #5bc0de;
+            font-size: 3em;
+        }
+    .exist{ color:  #5bc0de;}
+       .success{ color: green}
+    .failed{color: red}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-icon {
+            color: #4CAF50;
+            font-size: 3em;
+        }
+        .error-icon {
+            color: #ff5555;
+            font-size: 3em;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>

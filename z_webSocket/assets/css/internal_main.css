@@ -1,0 +1,50 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.profile-header {
+    text-align: center;
+    padding: 20px;
+}
+
+.profile-header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profile-details {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-section {
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.profile-section h2 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.profile-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-section ul li {
+    margin-left: 20px;
+}
+
+
+
+.headermenu{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.headermenu li { float: left; min-width:120px; list-style: none; }
