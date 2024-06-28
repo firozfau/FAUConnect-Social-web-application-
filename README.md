@@ -9,12 +9,15 @@ The goal of this project is to develop an easy-to-use application that allows FA
 
 Users of the application create an account, in which they enter their personal (full name, email address, gender, picture, spoken languages: German and/or English) and FAU-related information (status group: scientific staff/non-scientific staff; organizational unit, research areas/areas of expertise). Every participant can select 3 current key topics they would like to have an exchange about (e.g. “study program development”, “Campo”, “machine learning” etc.) Participants will only be matched with people who speak at least one of their selected languages. The matchmaking is carried out by the application without the involvement of the participants, i.e. participants cannot browse through the existing profiles, but are set up with a “match” by the app (according to their settings).
 
-Promo-vidoe:
-https://www.youtube.com/watch?v=Dk0Kk1C3ULE
+
+
   ```sh
-web-link: 
+Promo-vidoe: [https://connect.cs.fau.de/](https://www.youtube.com/watch?v=Dk0Kk1C3ULE)
   ```
-https://connect.cs.fau.de/
+  ```sh
+web-link: https://connect.cs.fau.de/
+  ```
+
 
 Development-short-description: 
 * website [Directory]
