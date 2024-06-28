@@ -12,7 +12,7 @@ Users of the application create an account, in which they enter their personal (
 
 
   ```sh
-Promo-vidoe: [https://connect.cs.fau.de/](https://www.youtube.com/watch?v=Dk0Kk1C3ULE)
+Promo-vidoe: "https://www.youtube.com/watch?v=Dk0Kk1C3ULE"
   ```
   ```sh
 web-link: https://connect.cs.fau.de/
