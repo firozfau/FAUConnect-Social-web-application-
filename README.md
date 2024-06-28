@@ -11,6 +11,7 @@ Users of the application create an account, in which they enter their personal (
 
 Promo-vidoe:
 https://www.youtube.com/watch?v=Dk0Kk1C3ULE
+web-link: https://connect.cs.fau.de/
 
 Development-short-description: 
 * website [Directory]
